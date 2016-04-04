@@ -1,0 +1,19 @@
+{
+  "name": "card-history-to-csv",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/delphinus35/card-history-to-csv.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/delphinus35/card-history-to-csv/issues"
+  },
+  "homepage": "https://github.com/delphinus35/card-history-to-csv#readme"
+}
