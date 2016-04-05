@@ -1,0 +1,9 @@
+{
+  "name": "card-history-to-csv",
+  "version": false,
+  "dependencies": {},
+  "ambientDevDependencies": {
+    "meow": "github:delphinus35/DefinitelyTyped/meow/meow.d.ts#feature/meow",
+    "node": "registry:dt/node#4.0.0+20160330064709"
+  }
+}
