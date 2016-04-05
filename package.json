@@ -1,10 +1,10 @@
 {
   "name": "card-history-to-csv",
   "version": "1.0.0",
-  "description": "",
+  "description": "Utility for converting card history to csv",
   "scripts": {
-    "build": "tsc bin/index.ts",
-    "install": "typings install && tsc bin/index.ts"
+    "build": "tsc index.ts",
+    "install": "typings install && tsc index.ts"
   },
   "repository": {
     "type": "git",
@@ -17,11 +17,12 @@
   },
   "homepage": "https://github.com/delphinus35/card-history-to-csv#readme",
   "bin": {
-    "card-history-to-csv": "bin/index.js"
+    "card-history-to-csv": "index.js"
   },
   "devDependencies": {
     "meow": "^3.7.0",
     "typescript": "^1.8.9",
-    "typings": "^0.7.12"
+    "typings": "^0.7.12",
+    "underscore": "^1.8.3"
   }
 }
