@@ -21,6 +21,7 @@
   },
   "devDependencies": {
     "meow": "^3.7.0",
+    "moment": "^2.12.0",
     "typescript": "^1.8.9",
     "typings": "^0.7.12",
     "underscore": "^1.8.3"
