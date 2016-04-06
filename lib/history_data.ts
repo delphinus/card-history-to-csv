@@ -16,12 +16,13 @@ export class HistoryParser {
 
     parse(): History[] {
 
-        return this.data.split(/\r?\n/).map(row => {
+        const histories = [new History({header: true})];
+        return histories.concat(this.data.split(/\r?\n/).map(row => {
             const [dateString, payee, amountString] = row.split(/\t/);
             const date = moment(new Date(dateString));
             const amount = parseInt(amountString, 10);
             return new History({date, payee, amount});
-        });
+        }));
     }
 
     private readFile(): void {
