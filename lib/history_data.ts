@@ -3,11 +3,7 @@
 import fs = require("fs");
 import moment = require("moment");
 
-export interface History {
-    amount: number;
-    date:   moment.Moment;
-    payee:  string;
-}
+import History = require("./history");
 
 export class HistoryParser {
 
@@ -18,13 +14,13 @@ export class HistoryParser {
         this.readFile();
     }
 
-    public parse(): History[] {
+    parse(): History[] {
 
         return this.data.split(/\r?\n/).map(row => {
             const [dateString, payee, amountString] = row.split(/\t/);
-            const date = moment(dateString);
+            const date = moment(new Date(dateString));
             const amount = parseInt(amountString, 10);
-            return {date, payee, amount};
+            return new History({date, payee, amount});
         });
     }
 

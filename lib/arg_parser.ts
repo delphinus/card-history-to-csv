@@ -15,7 +15,7 @@ export class ArgParser {
 
     constructor(private pkgName: string) { }
 
-    public parse(): ParsedArgs {
+    parse(): ParsedArgs {
 
         const cli = <ParsedArgs> meow(
             `
