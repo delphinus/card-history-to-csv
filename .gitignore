@@ -78,5 +78,5 @@ Temporary Items
 
 
 index.js
-bin/*.js
+lib/**/*.js
 typings
