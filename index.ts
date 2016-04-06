@@ -2,8 +2,9 @@
 ///<reference path="./typings/main.d.ts" />
 
 import _ = require("underscore");
-import fs = require("fs");
 import meow = require("meow");
+
+import app = require("./lib/app");
 
 const $0 = _.last(__filename.split('/'), 2)[0];
 
@@ -31,15 +32,4 @@ if (typeof cli.input[0] !== "string" || cli.flags["help"]) {
     cli.showHelp();
 }
 
-let historyData;
-const filename = cli.flags["in"];
-if (typeof filename === "string") {
-    try {
-        historyData = fs.readFileSync(filename, "utf8");
-    } catch (e) {
-        console.error(`file not found: ${e}`);
-        process.exit(-1);
-    }
-} else {
-    historyData = fs.readFileSync("/dev/stdin", "utf8");
-}
+app.start(cli);
