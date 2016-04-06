@@ -3,7 +3,7 @@
   "version": false,
   "dependencies": {},
   "ambientDevDependencies": {
-    "meow": "github:delphinus35/DefinitelyTyped/meow/meow.d.ts#ba1e881",
+    "meow": "github:delphinus35/DefinitelyTyped/meow/meow.d.ts#9759874ecdcccdcb018d0fa197b3d827744b5918",
     "node": "registry:dt/node#4.0.0+20160330064709",
     "underscore": "registry:dt/underscore#1.7.0+20160316155526"
   }
