@@ -4,7 +4,7 @@
   "description": "Utility for converting card history to csv",
   "scripts": {
     "build": "tsc index.ts",
-    "install": "typings install && tsc index.ts"
+    "install": "typings install && tsc -p ."
   },
   "repository": {
     "type": "git",
