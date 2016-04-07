@@ -19,7 +19,6 @@ export class HistoryParser {
         const histories = [new History({header: true})];
         return histories.concat(this.data.split(/\r?\n/).map(row => {
             const [dateString, payee, amountString] = row.split(/\t/).filter((str: string) => ! str.match(/^\s*$/));
-            console.log(row.split(/\t/).filter((str: string) => ! str.match(/^\s*$/)));
             const date = moment(new Date(dateString));
             const amount = parseInt(this.cleanUp(amountString), 10);
             return new History({date, payee, amount});
