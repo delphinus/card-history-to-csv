@@ -18,9 +18,10 @@ export class HistoryParser {
 
         const histories = [new History({header: true})];
         return histories.concat(this.data.split(/\r?\n/).map(row => {
-            const [dateString, payee, amountString] = row.split(/\t/);
+            const [dateString, payee, amountString] = row.split(/\t/).filter((str: string) => ! str.match(/^\s*$/));
+            console.log(row.split(/\t/).filter((str: string) => ! str.match(/^\s*$/)));
             const date = moment(new Date(dateString));
-            const amount = parseInt(amountString, 10);
+            const amount = parseInt(this.cleanUp(amountString), 10);
             return new History({date, payee, amount});
         }));
     }
@@ -37,5 +38,10 @@ export class HistoryParser {
         } else {
             this.data = fs.readFileSync("/dev/stdin", "utf8");
         }
+    }
+
+    private cleanUp(str: string): string {
+
+        return str.replace(/[￥,]/g, "");
     }
 }
