@@ -10,6 +10,8 @@ interface HistoryOptions {
 const header = "Type,Date,Account,CurrencyCode,Amount,AccountTo,CurrencyCodeTo,AmountTo,Category,Subcategory,Payee/Payer,Tag,Note"
     .split(',');
 
+const FULLWIDTH_ALPHANUMERIC: RegExp = /[\uFF01-\uFF5F]/g;
+
 class History {
 
     constructor(private options: HistoryOptions) { }
@@ -30,16 +32,22 @@ class History {
                 "",
                 "",
                 "",
-                this.trim(this.options.payee),
+                this.cleanUp(this.options.payee),
                 "",
                 "",
             ];
         }
     }
 
-    private trim(str: string): string {
+    private cleanUp(str: string): string {
 
-        return str.replace(/^\s+/, "").replace(/\s+$/, "");
+        return str
+            .replace(/^\s+|\s+$/g, "")
+            .replace(/\s+/g, " ")
+            .replace(
+                FULLWIDTH_ALPHANUMERIC,
+                (char: string) => String.fromCharCode(char.charCodeAt(0) - 65248)
+            );
     }
 }
 
