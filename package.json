@@ -21,6 +21,7 @@
   },
   "devDependencies": {
     "csv-stringify": "^1.0.2",
+    "iconv": "^2.1.11",
     "meow": "^3.7.0",
     "moment": "^2.12.0",
     "q": "^1.4.1",

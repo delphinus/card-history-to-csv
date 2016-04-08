@@ -1,5 +1,6 @@
 ///<reference path="../typings/main.d.ts" />
 
+import _ = require("underscore");
 import fs = require("fs");
 import moment = require("moment");
 
@@ -17,12 +18,23 @@ export class HistoryParser {
     parse(): History[] {
 
         const histories = [new History({header: true})];
-        return histories.concat(this.data.split(/\r?\n/).map(row => {
-            const [dateString, payee, amountString] = row.split(/\t/).filter((str: string) => ! str.match(/^\s*$/));
-            const date = moment(new Date(dateString));
-            const amount = parseInt(this.cleanUp(amountString), 10);
-            return new History({date, payee, amount});
-        }));
+        return histories.concat(
+            this.data
+                .split(/\r?\n/)
+                .reduce(
+                    (prev: History[], curr: string) => {
+                        const values = curr.split(/\t/).filter(str => ! str.match(/^\s*$/));
+                        if (this.validate(values)) {
+                            const [dateString, payee, amountString] = values;
+                            const date = moment(new Date(dateString));
+                            const amount = parseInt(this.cleanUp(amountString), 10);
+                            prev.push(new History({date, payee, amount}));
+                        }
+                        return prev;
+                    },
+                    []
+                )
+        );
     }
 
     private readFile(): void {
@@ -31,12 +43,22 @@ export class HistoryParser {
             try {
                 this.data = fs.readFileSync(this.filename, "utf8");
             } catch (e) {
-                console.error(`file not found: ${e}`);
-                process.exit(-1);
+                this.error(`file not found: ${e}`);
             }
         } else {
             this.data = fs.readFileSync("/dev/stdin", "utf8");
         }
+    }
+
+    private validate(values: string[]): boolean {
+
+        return values.length === 3 && values.every(v => _.isString(v) && v.length > 0);
+    }
+
+    private error(str: string): void {
+
+        console.log(str);
+        process.exit(-1);
     }
 
     private cleanUp(str: string): string {
