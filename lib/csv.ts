@@ -7,11 +7,13 @@ import stringify = require("csv-stringify");
 import stream = require("stream");
 
 import argParser = require("./arg_parser");
-import History = require("./history");
+import history = require("./history");
 
 class Csv {
 
     private stringifier = stringify({
+        columns:    history.header,
+        header:     true,
         lineBreaks: "windows",
         quoted:     true,
     });
@@ -19,7 +21,7 @@ class Csv {
     private csvData = "";
     private writeStream: fs.WriteStream;
 
-    constructor(private cli: argParser.ParsedArgs, private data: History[]) { }
+    constructor(private cli: argParser.ParsedArgs, private data: history.History[]) { }
 
     generate(): Q.Promise<string> {
 

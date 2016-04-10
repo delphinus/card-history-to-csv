@@ -4,7 +4,7 @@ import _ = require("underscore");
 import fs = require("fs");
 import moment = require("moment");
 
-import History = require("./history");
+import history = require("./history");
 
 export class HistoryParser {
 
@@ -15,26 +15,23 @@ export class HistoryParser {
         this.readFile();
     }
 
-    parse(): History[] {
+    parse(): history.History[] {
 
-        const histories = [new History({header: true})];
-        return histories.concat(
-            this.data
-                .split(/\r?\n/)
-                .reduce(
-                    (prev: History[], curr: string) => {
-                        const values = curr.split(/\t/).filter(str => ! str.match(/^\s*$/));
-                        if (this.validate(values)) {
-                            const [dateString, payee, amountString] = values;
-                            const date = moment(new Date(dateString));
-                            const amount = parseInt(this.cleanUp(amountString), 10);
-                            prev.push(new History({date, payee, amount}));
-                        }
-                        return prev;
-                    },
-                    []
-                )
-        );
+        return this.data
+            .split(/\r?\n/)
+            .reduce(
+                (prev: history.History[], curr: string) => {
+                    const values = curr.split(/\t/).filter(str => ! str.match(/^\s*$/));
+                    if (this.validate(values)) {
+                        const [dateString, payee, amountString] = values;
+                        const date = moment(new Date(dateString));
+                        const amount = parseInt(this.cleanUp(amountString), 10);
+                        prev.push(new history.History({date, payee, amount}));
+                    }
+                    return prev;
+                },
+                []
+            );
     }
 
     private readFile(): void {
