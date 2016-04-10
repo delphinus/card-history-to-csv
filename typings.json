@@ -4,7 +4,7 @@
   "dependencies": {},
   "ambientDevDependencies": {
     "csv-stringify": "registry:dt/csv-stringify#0.0.0+20160317120654",
-    "iconv": "github:delphinus35/DefinitelyTyped/iconv/iconv.d.ts#dde5492",
+    "iconv": "github:delphinus35/DefinitelyTyped/iconv/iconv.d.ts#c58f51d",
     "meow": "github:delphinus35/DefinitelyTyped/meow/meow.d.ts#9759874ecdcccdcb018d0fa197b3d827744b5918",
     "moment": "registry:dt/moment#2.8.0+20160316155526",
     "moment-node": "registry:dt/moment-node#2.11.1+20160329220348",
