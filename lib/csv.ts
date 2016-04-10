@@ -31,19 +31,7 @@ class Csv {
         this.writeStream = fs.createWriteStream(filename)
             .on("error", (err: Error) => deferred.reject(err))
             .on("close", () => deferred.resolve(filename));
-
-        this.iconv.pipe(this.writeStream);
-
-        this.stringifier
-            .on("readable", () => {
-                let row: string;
-                while(row = <string> this.stringifier.read()) {
-                    this.iconv.write(row);
-                }
-            })
-            .on("error", (err: Error) => deferred.reject(err))
-            .on("finish", () => this.iconv.end());
-
+        this.stringifier.pipe(this.iconv).pipe(this.writeStream);
         this.data.forEach(row => this.stringifier.write(row.stringify()));
         this.stringifier.end();
 
